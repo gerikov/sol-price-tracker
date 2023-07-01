@@ -9,7 +9,7 @@
   background-color: #1e1e2d;
   border-radius: 8px;
   @include mobile {
-    padding: 20px;
+    padding: 30px;
     max-width: 300px;
   }
 }
@@ -27,16 +27,16 @@
   justify-content: center;
   gap: 10px;
 }
-
-button {
-  padding: 8px 12px;
-  background-color: #2b2b40;
-  color: #7e8299;
-  border-radius: 4px;
-  cursor: pointer;
+.error {
+  margin: 20px 0;
+  margin-bottom: 20px;
+  color: red;
+  font-size: 18px;
 }
 
-.active {
-  background-color: black;
-  color: white;
+.ticker {
+  color: rgba(255, 255, 255, 0.5);
+  margin-right: 4px;
+  font-size: 32px;
+  vertical-align: text-top;
 }

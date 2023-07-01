@@ -4,6 +4,25 @@ import classNames from "classnames";
 import cn from "classnames";
 import { useCallback, useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
+import Button from "../Button/Button";
+
+const Price = ({ ticker, price, error }) => {
+  const symbol = {
+    usd: "$",
+    eur: "€",
+    btc: "₿",
+  };
+  return (
+    <>
+      {!error && (
+        <div>
+          <span className={styles.ticker}>{symbol[ticker]}</span>
+          {price}
+        </div>
+      )}
+    </>
+  );
+};
 
 const PriceModule = () => {
   const [price, setPrice] = useState(null);
@@ -13,13 +32,16 @@ const PriceModule = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchPrice = useCallback(async (currency) => {
-    const { data } = await axios.get(
-      `https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=${currency}`
-    );
-    if (data) {
-      setPrice(data.solana[currency]);
-    } else {
-      setError("Something went wrong please try again");
+    try {
+      const { data } = await axios.get(
+        `https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=${currency}`
+      );
+      if (data) {
+        setPrice(data?.solana[currency]);
+      }
+    } catch (error) {
+      console.log(error);
+      setError(error.message);
     }
   }, []);
 
@@ -34,33 +56,26 @@ const PriceModule = () => {
     };
   }, [currency]);
 
-  const handleClick = (input) => {
-    setCurrency(input);
-    setActive(input);
+  const handleClick = (ticker) => {
+    setCurrency(ticker);
+    setActive(ticker);
   };
   return (
     <div className={styles.PriceModule}>
-      <span className={styles.price}>{isLoading ? <Loader /> : price}</span>
-      <span className={styles.error}>{}</span>
+      <span className={styles.price}>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <>
+            <Price ticker={currency} price={price} error={error} />
+            {error && <span className={styles.error}>{error}</span>}
+          </>
+        )}
+      </span>
       <div className={styles.buttonContainer}>
-        <button
-          onClick={() => handleClick("usd")}
-          className={cn(active === "usd" ? styles.active : "")}
-        >
-          USD
-        </button>
-        <button
-          onClick={() => handleClick("eur")}
-          className={cn(active === "eur" ? styles.active : "")}
-        >
-          EUR
-        </button>
-        <button
-          onClick={() => handleClick("btc")}
-          className={cn(active === "btc" ? styles.active : "")}
-        >
-          BTC
-        </button>
+        <Button handleClick={handleClick} active={active} ticker={"usd"} />
+        <Button handleClick={handleClick} active={active} ticker={"eur"} />
+        <Button handleClick={handleClick} active={active} ticker={"btc"} />
       </div>
     </div>
   );
