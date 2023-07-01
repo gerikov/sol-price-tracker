@@ -78,6 +78,9 @@ const PriceModule = () => {
         <Button handleClick={handleClick} active={active} ticker={"eur"} />
         <Button handleClick={handleClick} active={active} ticker={"btc"} />
       </div>
+      <div className={styles.creator}>
+        Created by <a href="https://twitter.com/gerikov_sol">@gerikov</a>{" "}
+      </div>
     </div>
   );
 };
