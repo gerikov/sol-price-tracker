@@ -62,6 +62,7 @@ const PriceModule = () => {
   };
   return (
     <div className={styles.PriceModule}>
+      <div className={styles.title}>Solana price</div>
       <span className={styles.price}>
         {isLoading ? (
           <Loader />

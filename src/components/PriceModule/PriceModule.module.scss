@@ -8,6 +8,10 @@
   padding: 50px 100px;
   background-color: #1e1e2d;
   border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   @include mobile {
     padding: 30px;
     max-width: 300px;
@@ -39,4 +43,11 @@
   margin-right: 4px;
   font-size: 32px;
   vertical-align: text-top;
+}
+
+.title {
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 20px;
+  margin-bottom: 10px;
 }
