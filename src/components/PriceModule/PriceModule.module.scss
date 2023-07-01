@@ -1,0 +1,42 @@
+@mixin mobile {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+
+.PriceModule {
+  padding: 50px 100px;
+  background-color: #1e1e2d;
+  border-radius: 8px;
+  @include mobile {
+    padding: 20px;
+    max-width: 300px;
+  }
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 48px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+button {
+  padding: 8px 12px;
+  background-color: #2b2b40;
+  color: #7e8299;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.active {
+  background-color: black;
+  color: white;
+}
